@@ -14,7 +14,7 @@ def test(num_tests):
 
     populate_tests(num_tests, generatedinputs, expectedoutputs)
 
-    test = Network([1, 1])
+    test = Network([1, 1, 1])
 
     for i in range(num_tests):
         output = test.getOutput(generatedinputs[i])

@@ -2,10 +2,11 @@ from random import *
 
 
 class Neuron:
-    incoming = []
-    weights = []
-    bias = 0
-    result = 0
+    def __init__(self):
+        self.incoming = []
+        self.weights = []
+        self.bias = 0
+        self.result = 0
 
     def addNeuron(self, neuron, weight):
         self.incoming.append(neuron)
@@ -27,11 +28,11 @@ class Neuron:
 
 
 class Network:
-    inputNeurons = []
-    outputNeurons = []
-
     #neurons is an array of ints, representing the number of neurons in each layer
     def __init__(self, neurons):
+        self.inputNeurons = []
+        self.outputNeurons = []
+
         for i in range(neurons[0]):
             self.inputNeurons.append(Neuron())
 
@@ -63,6 +64,8 @@ class Network:
     def computeLayer(self, layer):
         if (layer == self.inputNeurons):
             return
+
+        #print layer[0].incoming
         #make sure the incoming of each neuron is computed
         self.computeLayer(layer[0].incoming)
 

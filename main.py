@@ -1,4 +1,5 @@
 from classes import Network, Neuron
 from testing import test
+import sys
 
-test(100)
+print test(100)
