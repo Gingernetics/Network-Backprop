@@ -1,4 +1,4 @@
 from classes import Network, Neuron
 from testing import test
 
-test(10)
+test(100)
