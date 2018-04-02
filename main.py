@@ -1,3 +1,4 @@
-from classes import *
-test = Network(9)
-print test.getOutput()
+from classes import Network, Neuron
+from testing import test
+
+test(10)

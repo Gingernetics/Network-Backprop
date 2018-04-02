@@ -1,7 +1,7 @@
 from random import *
 
 
-class neuron:
+class Neuron:
     incoming = []
     weights = []
     bias = 0
@@ -23,6 +23,7 @@ class neuron:
             self.result += self.weights[i] * neuron.result
             i += 1
         self.result += self.bias
+
         if (self.result >= 0):
             self.result = 1
         else:
@@ -31,13 +32,13 @@ class neuron:
 
 
 class Network:
-    inputNeuron = neuron()
-    outputNeuron = neuron()
+    inputNeuron = Neuron()
+    outputNeuron = Neuron()
 
-    def __init__(self, input):
-        self.inputNeuron.result = input
+    def __init__(self): #self, numlayers):
         self.outputNeuron.addNeuron(self.inputNeuron, 9)
 
-    def getOutput(self):
+    def getOutput(self, input):
+        self.inputNeuron.result = input
         self.outputNeuron.computeResult()
         return self.outputNeuron.result
