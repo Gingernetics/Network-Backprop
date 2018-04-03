@@ -1,5 +1,5 @@
-from random import *
-
+from random import randint
+from math import exp
 
 class Neuron:
     def __init__(self):
@@ -20,12 +20,13 @@ class Neuron:
             self.result += self.weights[i] * neuron.result
             i += 1
 
-        if (self.result >= 0):
-            self.result = 1
-        else:
-            self.result = 0
+        self.result = self.calculateSigmoid(self.result)
         return self.result
 
+
+    def calculateSigmoid(self, input):
+        answer = 1/ (1 + exp(-1 * input))
+        return answer
 
 class Network:
     #neurons is an array of ints, representing the number of neurons in each layer

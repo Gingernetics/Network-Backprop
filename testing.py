@@ -11,15 +11,18 @@ def test(num_tests):
 
     errors = []
 
-
     populate_tests(num_tests, generatedinputs, expectedoutputs)
 
-    test = Network([1, 1, 1])
+    test = Network([1, 3, 1])
 
     for i in range(num_tests):
         output = test.getOutput(generatedinputs[i])
         producedoutputs.append(output)
-        if (output != expectedoutputs[i]):
+        #round floats
+        for i in range(len(output)):
+            output[i] = int(round(output[i]))
+        #check output
+        if (output == expectedoutputs[i]):
             pair = (generatedinputs[i], expectedoutputs[i], output)
             errors.append(pair)
 
