@@ -3,26 +3,31 @@
 from classes import Network, Neuron
 from random import *
 
+generatedinputs = []
+expectedoutputs = []
+producedoutputs = []
+
+errors = []
+
+net = Network([1, 3, 1])
 
 def test(num_tests):
-    generatedinputs = []
-    expectedoutputs = []
-    producedoutputs = []
+    global generatedinputs
+    global expectedoutputs
+    global producedoutputs
+    global errors
+    global net
 
-    errors = []
-
-    populate_tests(num_tests, generatedinputs, expectedoutputs)
-
-    test = Network([1, 3, 1])
+    populate_tests(num_tests)
 
     for i in range(num_tests):
-        output = test.getOutput(generatedinputs[i])
+        output = net.getOutput(generatedinputs[i])
         producedoutputs.append(output)
         #round floats
-        for i in range(len(output)):
-            output[i] = int(round(output[i]))
+        for j in range(len(output)):
+            output[j] = int(round(output[j]))
         #check output
-        if (output == expectedoutputs[i]):
+        if (output != expectedoutputs[i]):
             pair = (generatedinputs[i], expectedoutputs[i], output)
             errors.append(pair)
 
@@ -35,7 +40,10 @@ def test(num_tests):
     print "Stuff Correct: " + str(1 - len(errors)*1.0/num_tests)
     return errors
 
-def populate_tests(num_tests, generatedinputs, expectedoutputs):
+def populate_tests(num_tests):
+    global generatedinputs
+    global expectedoutputs
+
     for i in range(num_tests):
         rand_input = randint(-20, 20)
         if (rand_input >= 0):
@@ -46,3 +54,6 @@ def populate_tests(num_tests, generatedinputs, expectedoutputs):
         generatedinputs.append([rand_input])
 
         expectedoutputs.append([expected])
+
+def backprop():
+    pass
