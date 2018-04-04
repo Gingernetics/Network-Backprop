@@ -1,12 +1,14 @@
-from random import randint
+from random import *
 from math import exp
 
 class Neuron:
     def __init__(self):
         self.incoming = []
         self.weights = []
-        self.bias = 0
+        self.bias = random() * 2 - 1
         self.result = 0
+        self.z = 0
+
 
     def addNeuron(self, neuron, weight):
         self.incoming.append(neuron)
@@ -14,19 +16,27 @@ class Neuron:
 
     #Incoming neuron's results should be computed before calling this
     def computeResult(self):
-        self.result = self.bias
+        self.z = self.bias
         i = 0
         for neuron in self.incoming:
-            self.result += self.weights[i] * neuron.result
+            self.z += self.weights[i] * neuron.result
             i += 1
 
-        self.result = self.calculateSigmoid(self.result)
+        self.result = self.calculateSigmoid(self.z)
         return self.result
 
 
     def calculateSigmoid(self, input):
         answer = 1/ (1 + exp(-1 * input))
         return answer
+
+    def calculateSigmoidPrime(self):
+        exponent = exp(-1 * self.z)
+        sum = 1 + exponent
+        return exponent / ((sum) ** 2)
+
+    def __repr__(self):
+        return "Neuron: bias:%f, weights: %s" % (self.bias, self.weights)
 
 class Network:
     #neurons is an array of ints, representing the number of neurons in each layer
@@ -46,7 +56,7 @@ class Network:
                 neuron = Neuron()
                 current.append(neuron)
                 for prev in previous:
-                    neuron.addNeuron(prev, randint(-20, 20))
+                    neuron.addNeuron(prev, random() * 2 - 1)
             previous = current
         self.outputNeurons = previous
 
@@ -72,3 +82,11 @@ class Network:
 
         for neuron in layer:
             neuron.computeResult()
+
+    def __repr__(self):
+        res = "[\n"
+        layer = self.outputNeurons
+        while (layer):
+            res += str(layer) + "\n"
+            layer = layer[0].incoming
+        return res + "]"

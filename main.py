@@ -1,5 +1,7 @@
 from classes import Network, Neuron
 from testing import test
+from random import *
 import sys
 
-print test(10)
+seed()
+test(1, 3)
