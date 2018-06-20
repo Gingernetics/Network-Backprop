@@ -1,11 +1,11 @@
 from random import *
-from math import exp, trunc
+from math import exp
 
 class Neuron:
     def __init__(self):
         self.incoming = []
         self.weights = []
-        self.bias = random() * 2
+        self.bias = random() * 2 - 1
         self.result = 0
         self.z = 0
 
@@ -36,21 +36,13 @@ class Neuron:
         return exponent / ((sum) ** 2)
 
     def __repr__(self):
-	trunc_weights = []
-	#Add a truncated version of weight for presentation
-	for weight in self.weights:
-	    trunc_weights.append(trunc(weight*100)/100.0)
-	print "Weights: " + strtrunc_weights
-        return "B:%.2f, W:%s" % (self.bias, trunc_weights)
+        return "Neuron: bias:%f, weights: %s" % (self.bias, self.weights)
 
 class Network:
     #neurons is an array of ints, representing the number of neurons in each layer
     def __init__(self, neurons):
         self.inputNeurons = []
         self.outputNeurons = []
-
-	#Storing the initial data for repr function
-	self.neurons = neurons
 
         for i in range(neurons[0]):
             self.inputNeurons.append(Neuron())
@@ -91,68 +83,10 @@ class Network:
         for neuron in layer:
             neuron.computeResult()
 
-
-
-##################################################################
-#Printing out network
-
-
-    def tree(self):
-	tree = ""
-	max_number = 0
-	for number in self.neurons:
-	    if (number > max_number):
-		max_number = number
-
-	line_num = max_number - 1
-	while (line_num != 0):
-	    tree = self.buildLine(line_num) + tree
-	    line_num -= 1	
-        tree = self.buildLine(line_num) + tree
-	return tree	
-
-    #line_num is 0 indexed
-    def buildLine(self, line_num):
-	position = 0
-	line = ""
-	filler = "\t\t"
-	for num_neurons in self.neurons:
-	    if(num_neurons > line_num):
-		line += " " + str(self.getNeuronValue(position, line_num)) + "\t"
-	    else:
-		line += filler
-	    position += 1
-	line += "\n"
-	return line
-
-
-    #Imagine input neurons as 0th layer, output neurons as nth layer
-    def getNeuronValue(self, layer_number, neuron_number):
-	num_layers = len(self.neurons)
-	neuron = self.outputNeurons[0]
-	#Steps from output layer to desired layer
-	steps = num_layers - layer_number - 2
-	while (steps > 0):
-		neuron = neuron.incoming[0]
-		steps -= 1
-	print neuron
-	neuron = neuron.incoming[neuron_number] 
-	return neuron
-
-
-
-#####################################################################
-#Representation function
-
     def __repr__(self):
-        res = "\n<--------------------------------->\n"
-	'''
-	output = ""
-	layer = self.outputNeurons
+        res = "[\n"
+        layer = self.outputNeurons
         while (layer):
-            output += str(layer) + "\n"
+            res += str(layer) + "\n"
             layer = layer[0].incoming
-       '''
-	return res + self.tree() + res
-
-#####################################################################
+        return res + "]"

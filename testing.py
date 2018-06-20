@@ -6,7 +6,7 @@ from random import *
 generatedinputs = []
 expectedoutputs = []
 
-net = Network([1, 1, 1])
+net = Network([1, 4, 1])
 
 learn_rate = 5
 
@@ -14,10 +14,12 @@ def test(num_tests, num_backprop):
     for i in range(num_backprop):
         populate_tests(num_tests)
         check_network()
-        backprop()
-        check_network()
+        #backprop()
+        #check_network()
 
 
+
+#Creates a new set of training data
 def populate_tests(num_tests):
     global generatedinputs
     global expectedoutputs
@@ -33,8 +35,8 @@ def populate_tests(num_tests):
             expected = 0
 
         generatedinputs.append([rand_input])
-
         expectedoutputs.append([expected])
+
 
 def check_network():
     global generatedinputs
@@ -55,6 +57,8 @@ def check_network():
         if (output != expectedoutputs[i]):
             pair = (generatedinputs[i], expectedoutputs[i], output)
             errors.append(pair)
+
+    #Print the weights and biases of the network
     print net
 '''
     print "Generated Inputs"
@@ -63,9 +67,10 @@ def check_network():
     print expectedoutputs
     print "Produced Outputs"
     print producedoutputs
-    print "Stuff Correct: " + str(1 - len(errors)*1.0/len(generatedinputs))
-    return errors
 '''
+    #print "Stuff Correct: " + str(1 - len(errors)*1.0/len(generatedinputs))
+    #return errors
+
 def backprop():
     global generatedinputs
     global expectedoutputs
@@ -112,4 +117,5 @@ def backprop():
             previous_layer = layer
             layer = layer[0].incoming
             previous_deltas = current_deltas
-            print current_deltas
+#            print "Hi\n"
+#	    print current_deltas

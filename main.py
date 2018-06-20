@@ -3,5 +3,8 @@ from testing import test
 from random import *
 import sys
 
-seed()
-test(1, 3)
+#seed()
+
+
+#Number of generated tests, Number of backpropogations
+test(1, 1)
