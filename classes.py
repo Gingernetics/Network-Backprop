@@ -40,7 +40,7 @@ class Neuron:
 	#Add a truncated version of weight for presentation
 	for weight in self.weights:
 	    trunc_weights.append(trunc(weight*100)/100.0)
-	print "Weights: " + strtrunc_weights
+	#print "Weights: " + str(trunc_weights) + "\n"
         return "B:%.2f, W:%s" % (self.bias, trunc_weights)
 
 class Network:
@@ -130,13 +130,21 @@ class Network:
     def getNeuronValue(self, layer_number, neuron_number):
 	num_layers = len(self.neurons)
 	neuron = self.outputNeurons[0]
+
 	#Steps from output layer to desired layer
 	steps = num_layers - layer_number - 2
+
+	#Neuron will be set to the first neuron in each layer until 
+	#the neuron before desired neuron
 	while (steps > 0):
 		neuron = neuron.incoming[0]
 		steps -= 1
+
 	print neuron
-	neuron = neuron.incoming[neuron_number] 
+	if (num_layers != layer_number + 1):
+		neuron = neuron.incoming[neuron_number] 
+	print neuron
+	print "\n"
 	return neuron
 
 
