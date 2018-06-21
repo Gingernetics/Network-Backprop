@@ -15,6 +15,7 @@ class Neuron:
         self.weights.append(weight)
 
     #Incoming neuron's results should be computed before calling this
+    #Based on output = sigmoid of ( sum of (weights * previous activation) + bias)
     def computeResult(self):
         self.z = self.bias
         i = 0
@@ -140,13 +141,9 @@ class Network:
 		neuron = neuron.incoming[0]
 		steps -= 1
 
-	print neuron
 	if (num_layers != layer_number + 1):
 		neuron = neuron.incoming[neuron_number] 
-	print neuron
-	print "\n"
 	return neuron
-
 
 
 #####################################################################

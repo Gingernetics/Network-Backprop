@@ -6,7 +6,7 @@ from random import *
 generatedinputs = []
 expectedoutputs = []
 
-net = Network([1, 4, 1])
+net = Network([1, 2, 1])
 
 learn_rate = 5
 
@@ -14,6 +14,7 @@ def test(num_tests, num_backprop):
     for i in range(num_backprop):
         populate_tests(num_tests)
         check_network()
+	
         #backprop()
         #check_network()
 
@@ -82,7 +83,7 @@ def backprop():
         output = expectedoutputs[i]
 
         #Storing one layer at a time
-        previous_deltas = []
+        previous_errors = []
 
         #feedforward
         net.getOutput(input)
@@ -91,31 +92,31 @@ def backprop():
         previous_layer = net.outputNeurons
         for j in range(len(previous_layer)):
             neuron = previous_layer[j]
-            previous_deltas.append((neuron.result - output[j]
+            previous_errors.append((neuron.result - output[j]
                                    * neuron.calculateSigmoidPrime()))
 
         #backprop
         layer = net.outputNeurons[0].incoming
         while (layer != net.inputNeurons):
-            current_deltas = []
+            current_errors = []
 
-            #do current deltas
+            #do current errors
             for j in range(len(layer)):
-                delta = 0
-                for k in range(len(previous_deltas)):
-                    delta += previous_layer[k].weights[j] * \
-                             previous_deltas[k]
-                delta *= layer[j].calculateSigmoidPrime()
-                current_deltas.append(delta)
+                error = 0
+                for k in range(len(previous_errors)):
+                    error += previous_layer[k].weights[j] * \
+                             previous_errors[k]
+                error *= layer[j].calculateSigmoidPrime()
+                current_errors.append(error)
 
             #update previous layer
-            for neuron, delta in zip(previous_layer, previous_deltas):
-                neuron.bias -= learn_rate * delta
+            for neuron, error in zip(previous_layer, previous_errors):
+                neuron.bias -= learn_rate * error
                 for k in range(len(neuron.weights)):
-                    neuron.weights[k] -= learn_rate * delta * layer[k].result
+                    neuron.weights[k] -= learn_rate * error * layer[k].result
 
             previous_layer = layer
             layer = layer[0].incoming
-            previous_deltas = current_deltas
+            previous_errors = current_errors
 #            print "Hi\n"
 #	    print current_deltas
