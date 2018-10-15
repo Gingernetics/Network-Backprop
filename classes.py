@@ -116,7 +116,7 @@ class Network:
     def buildLine(self, line_num):
 	position = 0
 	line = ""
-	filler = "\t\t"
+	filler = "                "
 	for num_neurons in self.neurons:
 	    if(num_neurons > line_num):
 		line += " " + str(self.getNeuronValue(position, line_num)) + "\t"
@@ -158,6 +158,6 @@ class Network:
             output += str(layer) + "\n"
             layer = layer[0].incoming
        '''
-	return res + self.tree() + res
+	return self.tree() 
 
 #####################################################################
