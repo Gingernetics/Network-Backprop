@@ -6,6 +6,7 @@ By default, this network is designed to determine if an input is greater than or
 ---
 
 If you are interested in running this, clone the repository and run `$ python main.py`
+
 Alternatively, you can pipe the output into a file with `$ python main.py > test.txt`
 
 
