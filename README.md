@@ -12,33 +12,27 @@ Alternatively, you can pipe the output into a file with `$ python main.py > test
 
 The ouput will be look similar to this:
 
-
+```
 <--------------------------------------------------------------->
-
-
 Run 9
-<!--I love markdown -->
-B:1.74, W:[]      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            B:1.96, W:[1.81]         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            B:-3.15, W:[3.92, 3.1]
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                        B:1.81, W:[1.63]                       
+B:1.74, W:[]       B:1.96, W:[1.81]        B:-3.15, W:[3.92, 3.1]
+                   B:1.81, W:[1.63]                       
+
 
 Generated Inputs
 [[-20], [6], [10], [-7], [-7]]
-
 Expected Outputs
 [[0], [1], [1], [0], [0]]
-
 Produced Outputs
 [[0], [1], [1], [0], [0]]
 
 
 Raw Outputs
 [0.041, 0.98, 0.98, 0.041, 0.041]
-
 Stuff Correct: 1.0
-
 <--------------------------------------------------------------->
-
+```
 
 The first line signifies the cycle. The first time this runs, the program will attempt to feed the data into an untrained network. Each successive backpropigation cycle trains the network to be more accurate.
 
