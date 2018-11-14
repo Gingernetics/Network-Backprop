@@ -1,9 +1,7 @@
 # Network-Backprop
 An introdution to artificial neural networks
 
-By default, this network is designed to determine if an input is greater than or equal to 0. 
-
-In essence, it simulates a comparison operator.
+By default, this network is designed to determine if an input is greater than or equal to 0. In essence, it simulates a comparison operator.
 
 ---
 
@@ -13,29 +11,33 @@ Alternatively, you can pipe the output into a file with `$ python main.py > test
 
 The ouput will be look similar to this:
 
-`
+
 <--------------------------------------------------------------->
 
 
 Run 9
+<!--I love markdown -->
+B:1.74, W:[]      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            B:1.96, W:[1.81]         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            B:-3.15, W:[3.92, 3.1]
 
- B:1.74, W:[]    B:1.96, W:[1.81]        B:-3.15, W:[3.92, 3.1]
-                 B:1.81, W:[1.63]                       
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                        B:1.81, W:[1.63]                       
 
 Generated Inputs
-[[-20], [6], [10], [-7], [-7], [1], [16], [13], [19], [-12], [-14], [12], [-17], [17], [5], [19], [-3], [0], [-8], [4]]
+[[-20], [6], [10], [-7], [-7]]
+
 Expected Outputs
-[[0], [1], [1], [0], [0], [1], [1], [1], [1], [0], [0], [1], [0], [1], [1], [1], [0], [1], [0], [1]]
+[[0], [1], [1], [0], [0]]
+
 Produced Outputs
-[[0], [1], [1], [0], [0], [1], [1], [1], [1], [0], [0], [1], [0], [1], [1], [1], [0], [1], [0], [1]]
+[[0], [1], [1], [0], [0]]
 
 
 Raw Outputs
-[0.041, 0.98, 0.98, 0.041, 0.041, 0.976, 0.98, 0.98, 0.98, 0.041, 0.041, 0.98, 0.041, 0.98, 0.98, 0.98, 0.052, 0.951, 0.041, 0.98]
+[0.041, 0.98, 0.98, 0.041, 0.041]
+
 Stuff Correct: 1.0
 
 <--------------------------------------------------------------->
-`
+
 
 The first line signifies the cycle. The first time this runs, the program will attempt to feed the data into an untrained network. Each successive backpropigation cycle trains the network to be more accurate.
 
@@ -46,16 +48,20 @@ Generated Inputs are random, and the threshold for 0 vs 1 is at .5. The raw outp
 After the last backpropagation cycle, the program will test the network against a new set of random inputs.
 
 
+---
 
 There are several ways to modify the training conditions.
 
 Within main.py,
-	train(x,y) - number of generated tests, number of backpropagation cycles
-	test(x) - number of verification tests
+
+>	train(x,y) - number of generated tests, number of backpropagation cycles
+	
+>	test(x) - number of verification tests
 
 Within testing.py,
-	line 45, `rand_input = randint(-20, 20)`
-	Modifying this allows you to change the range of generated inputs. It is suggested that this be centered on the domain you choose to test.
 
-	line 50, `if (rand_input >= 0):`
-	This is the test condition. Play with it as you like.
+>	line 45, `rand_input = randint(-20, 20)`
+>	Modifying this allows you to change the range of generated inputs. It is suggested that this be centered on the domain you choose to test.
+	
+>	line 50, `if (rand_input >= 0):`
+>	This is the test condition. Play with it as you like.
