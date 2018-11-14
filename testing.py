@@ -24,8 +24,9 @@ def train(num_tests, num_backprop):
 
 
 def test(num_tests):
-    
+
     populate_tests(num_tests)
+    print("Testing values\n")   
     check_network()
 
 
@@ -41,12 +42,12 @@ def populate_tests(num_tests):
     for i in range(num_tests):
 
 	#If you allow a large range, you require more training sets to get accuracy
-        rand_input = randint(-10, 20)
+        rand_input = randint(-20, 20)
 
 	#Change training condition here
 	#Works really well for values around center of range, less well for boundary numbers
 	#Works really, really well if centered on 0
-        if (rand_input >= 5):
+        if (rand_input >= 0):
             expected = 1
         else:
             expected = 0

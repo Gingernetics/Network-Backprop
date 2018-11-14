@@ -8,7 +8,7 @@ import sys
 #Suggested: python main.py > output.txt 
 
 #Number of generated tests, Number of backpropogations
-train(15, 40)
+train(20, 10)
 
 #Number of tests
-test(20)
+test(30)
